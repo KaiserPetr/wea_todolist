@@ -4,10 +4,10 @@ const path = require("path");
 const mysql = require("mysql");
 const session = require("express-session");
 const MySQLStore = require("express-mysql-session")(session);
-const jsonServer = require('json-server');
-const server = jsonServer.create();
-const router = jsonServer.router('data/todolist-data.json');
-const middlewares = jsonServer.defaults();
+//const jsonServer = require('json-server');
+//const server = jsonServer.create();
+//const json_router = jsonServer.router('data/todolist-data.json');
+//const middlewares = jsonServer.defaults();
 const Router = require("./Router");
 
 app.use(express.static(path.join(__dirname, "build")));
@@ -59,14 +59,14 @@ app.get("/", function (req, res) {
   res.sendFile(path.join(__dirname, "build", "index.html"));
 });
 
-
+/*
 server.use(middlewares);
-server.use(router);
+server.use(json_router);
 
 server.listen(process.env.PORT || 8000, function(){
   console.log("json server listening on port %d in %s mode", this.address().port, server.settings.env);
 });
-
+*/
 
 app.listen(process.env.PORT || 3000, function(){
   console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
