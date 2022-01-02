@@ -14,13 +14,14 @@ app.use(express.static(path.join(__dirname, "build")));
 app.use(express.json());
 
 //database connection
-const db = mysql.createConnection({
+const db = mysql.createPool({
   host: "eu-cdbr-west-02.cleardb.net",
   user: "b642b39277b5f8",
   password: "7e1f7e2c",
   database: "heroku_09857087acdc930",
 });
 
+/*
 db.connect(function (err) {
   if (err) {
     console.log("DB error");
@@ -28,6 +29,7 @@ db.connect(function (err) {
     return false;
   }
 });
+*/
 
 const sessionStore = new MySQLStore(
   {
@@ -57,12 +59,14 @@ app.get("/", function (req, res) {
   res.sendFile(path.join(__dirname, "build", "index.html"));
 });
 
+
 server.use(middlewares);
 server.use(router);
 
 server.listen(process.env.PORT || 8000, function(){
   console.log("json server listening on port %d in %s mode", this.address().port, server.settings.env);
 });
+
 
 app.listen(process.env.PORT || 3000, function(){
   console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
