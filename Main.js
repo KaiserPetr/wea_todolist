@@ -9,7 +9,6 @@ const server = jsonServer.create();
 const router = jsonServer.router('data/todolist-data.json');
 const middlewares = jsonServer.defaults();
 const Router = require("./Router");
-const port = process.env.PORT || 8000;
 
 app.use(express.static(path.join(__dirname, "build")));
 app.use(express.json());
@@ -60,7 +59,10 @@ app.get("/", function (req, res) {
 
 server.use(middlewares);
 server.use(router);
-server.listen(port);
+
+server.listen(process.env.PORT || 8000, function(){
+  console.log("json server listening on port %d in %s mode", this.address().port, server.settings.env);
+});
 
 app.listen(process.env.PORT || 3000, function(){
   console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
