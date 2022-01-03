@@ -9,7 +9,7 @@ function TodoList() {
 
   // načtění dat z jsonu
   useEffect(() => {
-    fetch("http://localhost:8000/todos")
+    fetch("https://wea-todolist-json-server.herokuapp.com/todos/")
       .then((res) => {
         return res.json();
       })
@@ -28,7 +28,7 @@ function TodoList() {
     setTodos([...todos, todo]);
 
     axios
-      .post("http://localhost:8000/todos", todo)
+      .post("https://wea-todolist-json-server.herokuapp.com/todos/", todo)
       .then((resp) => {
         console.log(resp.data);
       })
@@ -45,7 +45,7 @@ function TodoList() {
 
     setTodos((prev) => prev.map((item) => (item.id === id ? newValue : item)));
     axios
-      .put("http://localhost:8000/todos/" + id, {
+      .put("https://wea-todolist-json-server.herokuapp.com/todos/" + id, {
         text: newValue.text,
         complete: false, //pri zmene polozky se nastavi jako unfinished
       })
@@ -63,7 +63,7 @@ function TodoList() {
     setTodos([...todos].filter((todo) => todo.id !== id));
 
     axios
-      .delete("http://localhost:8000/todos/" + id)
+      .delete("https://wea-todolist-json-server.herokuapp.com/todos/" + id)
       .then((resp) => {
         console.log(resp.data);
       })
@@ -78,7 +78,7 @@ function TodoList() {
       if (todo.id === id) {
         todo.complete = !todo.complete;
         axios
-          .put("http://localhost:8000/todos/" + id, {
+          .put("https://wea-todolist-json-server.herokuapp.com/todos/" + id, {
             text: todo.text,
             complete: todo.complete,
           })
